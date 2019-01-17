@@ -1,0 +1,20 @@
+在main.ts createChildren中加上如下代码：（egret版本5.2.13）
+egret.callLater(function () {
+    let div = document.getElementById('egret-player')
+    let wp = (div && div['egret-player']) || window['player']//WebPlayer
+    let option = wp.playerOption
+    let cw = option.contentWidth
+    let ch = option.contentHeight
+    let bl = ch / cw
+    let rh = bl * window.innerWidth
+    let y = (window.innerHeight - rh)
+    if (div) {
+        let style = div['style']
+        style.height = rh + 'px'
+        style.top = y / 2 + 'px'
+    }
+    else {
+        wp.player.screenDisplayList.offsetMatrix.ty = y
+        wp.stage.y = y;
+    }
+}, null)

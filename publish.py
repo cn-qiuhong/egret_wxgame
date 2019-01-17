@@ -1,4 +1,5 @@
 import os
+import shutil
 path = os.path
 cwd = os.getcwd()
 
@@ -21,3 +22,5 @@ if __name__ == '__main__':
     with open(manifestFile, 'w', encoding='UTF-8') as f:
         f.write(text)
     os.system('uglifyjs manifest.js -m -o manifest.js')
+    js_dir = path.join(cwd, 'js')
+    shutil.rmtree(js_dir)
